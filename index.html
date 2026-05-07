@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Adopt Tracker</title>
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="header">
+    <div class="header-inner">
+      <div class="logo">
+        <img src="assets/logo.svg" alt="Adopt Tracker" class="logo-img">
+        <span class="logo-text">Adopt Tracker</span>
+      </div>
+      <button class="btn btn-primary" id="btn-add">+ Agregar mascota</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="toolbar">
+      <div class="search-wrap">
+        <input type="text" id="search" class="input" placeholder="Buscar por nombre o especie...">
+      </div>
+      <div class="sort-wrap">
+        <select id="sort" class="input">
+          <option value="created_at">Ordenar por: Fecha</option>
+          <option value="name">Ordenar por: Nombre</option>
+          <option value="species">Ordenar por: Especie</option>
+          <option value="age">Ordenar por: Edad</option>
+          <option value="status">Ordenar por: Estado</option>
+        </select>
+        <select id="order" class="input">
+          <option value="desc">Descendente</option>
+          <option value="asc">Ascendente</option>
+        </select>
+      </div>
+      <button class="btn btn-secondary" id="btn-csv">Exportar CSV</button>
+    </div>
+
+    <div id="pets-grid" class="pets-grid"></div>
+    <div id="pagination" class="pagination"></div>
+  </main>
+
+  <!-- Modal crear/editar -->
+  <div id="modal-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="modal-title">Agregar mascota</h2>
+        <button class="modal-close" id="modal-close">&times;</button>
+      </div>
+      <form id="pet-form" class="pet-form">
+        <input type="hidden" id="pet-id">
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="input-name">Nombre *</label>
+            <input type="text" id="input-name" class="input" required>
+          </div>
+          <div class="form-group">
+            <label for="input-species">Especie *</label>
+            <select id="input-species" class="input" required>
+              <option value="">Seleccionar...</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="input-breed">Raza</label>
+            <input type="text" id="input-breed" class="input">
+          </div>
+          <div class="form-group">
+            <label for="input-age">Edad (años)</label>
+            <input type="number" id="input-age" class="input" min="0">
+          </div>
+          <div class="form-group">
+            <label for="input-status">Estado</label>
+            <select id="input-status" class="input">
+              <option value="Available">Disponible</option>
+              <option value="Adopted">Adoptado</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="input-description">Descripción</label>
+          <textarea id="input-description" class="input" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+          <label for="input-image">Imagen (máx. 1MB)</label>
+          <input type="file" id="input-image" accept="image/*">
+          <div id="image-preview" class="image-preview hidden">
+            <img id="preview-img" src="" alt="Vista previa">
+          </div>
+        </div>
+        <div class="modal-actions">
+          <button type="button" class="btn btn-ghost" id="btn-cancel">Cancelar</button>
+          <button type="submit" class="btn btn-primary-dark" id="btn-save">Guardar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal confirmar eliminar -->
+  <div id="delete-overlay" class="modal-overlay hidden">
+    <div class="modal modal-sm">
+      <div class="modal-header">
+        <h2>Eliminar mascota</h2>
+      </div>
+      <p class="delete-message">
+        ¿Estás segura de que querés eliminar a <strong id="delete-name"></strong>?
+        Esta acción no se puede deshacer.
+      </p>
+      <div class="modal-actions modal-actions-pad">
+        <button class="btn btn-ghost" id="btn-delete-cancel">Cancelar</button>
+        <button class="btn btn-danger" id="btn-delete-confirm">Eliminar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast de notificaciones -->
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
