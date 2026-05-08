@@ -4,6 +4,7 @@ const state = {
   sort: "name",
   order: "desc",
   q: "",
+  species: "",
 };
 
 let searchTimeout = null;
@@ -17,6 +18,15 @@ async function loadPets() {
     renderPagination(result.total, state.page, state.limit);
   } catch (err) {
     grid.innerHTML = `<div class="empty-state"><p>Error al cargar mascotas: ${escapeHtml(err.message)}</p></div>`;
+  }
+}
+
+async function handleDetail(id) {
+  try {
+    const pet = await getPetById(id);
+    showDetailModal(pet);
+  } catch {
+    showToast("Error al cargar la mascota", "error");
   }
 }
 
@@ -151,10 +161,17 @@ function setupEvents() {
     handleDelete(e.target.dataset.id);
   });
 
+  // Modal detalle
+  document.getElementById("detail-close").addEventListener("click", hideDetailModal);
+  document.getElementById("detail-overlay").addEventListener("click", e => {
+    if (e.target === e.currentTarget) hideDetailModal();
+  });
+
   // Delegación de eventos en tarjetas y paginación
   document.getElementById("pets-grid").addEventListener("click", e => {
     const btn = e.target.closest("[data-action]");
     if (!btn) return;
+    if (btn.dataset.action === "detail") handleDetail(btn.dataset.id);
     if (btn.dataset.action === "edit") handleEdit(btn.dataset.id);
     if (btn.dataset.action === "delete") showDeleteModal(btn.dataset.id, btn.dataset.name);
   });
@@ -168,10 +185,31 @@ function setupEvents() {
   });
 }
 
+function renderSpeciesSidebar(species) {
+  const list = document.getElementById("species-filter");
+  list.innerHTML = `<li><button class="species-btn active" data-species="">Todas</button></li>`;
+  species.forEach(s => {
+    const li = document.createElement("li");
+    li.innerHTML = `<button class="species-btn" data-species="${escapeHtml(s)}">${escapeHtml(s)}</button>`;
+    list.appendChild(li);
+  });
+
+  list.addEventListener("click", e => {
+    const btn = e.target.closest(".species-btn");
+    if (!btn) return;
+    list.querySelectorAll(".species-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    state.species = btn.dataset.species;
+    state.page = 1;
+    loadPets();
+  });
+}
+
 async function init() {
   try {
     const species = await getSpecies();
     populateSpecies(species);
+    renderSpeciesSidebar(species);
   } catch (err) {
     console.error("Error cargando especies:", err);
   }

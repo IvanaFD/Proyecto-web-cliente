@@ -36,8 +36,16 @@
       <button class="btn btn-secondary" id="btn-csv">Exportar CSV</button>
     </div>
 
-    <div id="pets-grid" class="pets-grid"></div>
-    <div id="pagination" class="pagination"></div>
+    <div class="content-area">
+      <aside class="species-sidebar">
+        <div class="species-sidebar-title">Especie</div>
+        <ul class="species-list" id="species-filter"></ul>
+      </aside>
+      <div class="pets-area">
+        <div id="pets-grid" class="pets-grid"></div>
+        <div id="pagination" class="pagination"></div>
+      </div>
+    </div>
   </main>
 
   <!-- Modal crear/editar -->
@@ -109,6 +117,17 @@
         <button class="btn btn-ghost" id="btn-delete-cancel">Cancelar</button>
         <button class="btn btn-danger" id="btn-delete-confirm">Eliminar</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Modal detalle -->
+  <div id="detail-overlay" class="modal-overlay hidden">
+    <div class="modal">
+      <div class="modal-header">
+        <h2 id="detail-name"></h2>
+        <button class="modal-close" id="detail-close">&times;</button>
+      </div>
+      <div id="detail-content" class="detail-body"></div>
     </div>
   </div>
 

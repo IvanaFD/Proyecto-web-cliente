@@ -37,6 +37,27 @@ function hideDeleteModal() {
   document.getElementById("delete-overlay").classList.add("hidden");
 }
 
+function showDetailModal(pet) {
+  document.getElementById("detail-name").textContent = pet.name;
+  document.getElementById("detail-content").innerHTML = `
+    ${pet.image_url ? `<img class="detail-image" src="${escapeHtml(pet.image_url)}" alt="${escapeHtml(pet.name)}">` : ""}
+    <div class="detail-info">
+      <span class="status-badge ${pet.status === "Available" ? "status-available" : "status-adopted"}">
+        ${pet.status === "Available" ? "Disponible" : "Adoptado"}
+      </span>
+      <div class="detail-row"><span class="detail-label">Especie</span>${escapeHtml(pet.species)}</div>
+      ${pet.breed ? `<div class="detail-row"><span class="detail-label">Raza</span>${escapeHtml(pet.breed)}</div>` : ""}
+      ${pet.age != null ? `<div class="detail-row"><span class="detail-label">Edad</span>${pet.age} año${pet.age !== 1 ? "s" : ""}</div>` : ""}
+      ${pet.description ? `<div class="detail-row detail-description">${escapeHtml(pet.description)}</div>` : ""}
+    </div>
+  `;
+  document.getElementById("detail-overlay").classList.remove("hidden");
+}
+
+function hideDetailModal() {
+  document.getElementById("detail-overlay").classList.add("hidden");
+}
+
 function populateSpecies(species) {
   const select = document.getElementById("input-species");
   species.forEach(s => {

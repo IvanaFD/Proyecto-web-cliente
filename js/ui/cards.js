@@ -7,7 +7,7 @@ function renderPets(pets) {
   }
 
   grid.innerHTML = pets.map(pet => `
-    <div class="pet-card">
+    <div class="pet-card" data-action="detail" data-id="${pet.id}">
       ${pet.image_url
         ? `<img class="pet-card-image" src="${escapeHtml(pet.image_url)}" alt="${escapeHtml(pet.name)}">`
         : `<div class="pet-card-placeholder">Sin imagen</div>`}

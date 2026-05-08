@@ -11,9 +11,10 @@ async function request(path, options = {}) {
   return data;
 }
 
-function getAllPets({ q = "", sort = "name", order = "desc", page = 1, limit = 10 } = {}) {
+function getAllPets({ q = "", species = "", sort = "name", order = "desc", page = 1, limit = 10 } = {}) {
   const params = new URLSearchParams({ sort, order, page, limit });
   if (q) params.set("q", q);
+  if (species) params.set("species", species);
   return request(`/pets?${params}`);
 }
 
