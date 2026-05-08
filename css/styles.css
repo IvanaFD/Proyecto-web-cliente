@@ -56,7 +56,6 @@ body {
   width: 36px;
   height: 36px;
   object-fit: contain;
-  filter: brightness(0) invert(1);
 }
 
 .logo-text {
@@ -269,7 +268,7 @@ textarea.input {
 
 .status-adopted {
   background: #f5e8e8;
-  color: #9e3333;
+  color: #bb6b2e;
 }
 
 .pet-card-actions {
