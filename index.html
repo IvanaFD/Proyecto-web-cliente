@@ -24,9 +24,7 @@
       </div>
       <div class="sort-wrap">
         <select id="sort" class="input">
-          <option value="created_at">Ordenar por: Fecha</option>
           <option value="name">Ordenar por: Nombre</option>
-          <option value="species">Ordenar por: Especie</option>
           <option value="age">Ordenar por: Edad</option>
           <option value="status">Ordenar por: Estado</option>
         </select>
@@ -118,7 +116,12 @@
   <div id="toast" class="toast hidden"></div>
 
   <script src="js/api.js"></script>
-  <script src="js/ui.js"></script>
+  <script src="js/utils/escape.js"></script>
+  <script src="js/utils/csv.js"></script>
+  <script src="js/ui/toast.js"></script>
+  <script src="js/ui/cards.js"></script>
+  <script src="js/ui/pagination.js"></script>
+  <script src="js/ui/modal.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>
