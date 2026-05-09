@@ -66,8 +66,3 @@ Conecta con `https://adopt-tracker-api.vercel.app`. Para apuntar a otra instanci
 
 Era la primera vez que construía una interfaz tan completa usando únicamente JavaScript vanilla, sin ningún framework ni librería. Fue útil para entender cómo funcionan el DOM y el fetch nativo por debajo. La desventaja más clara apareció a medida que la app crecía: manejar el estado, los eventos y los distintos modales de forma manual se vuelve difícil de seguir, algo que con React o Vue estaría mucho más ordenado. Para proyectos pequeños lo volvería a usar, pero para algo más grande preferiría un framework.
 
-## Repositorio API
-
-https://github.com/IvanaFD/Proyecto-web-backend
-
-
